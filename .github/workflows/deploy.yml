@@ -5,12 +5,22 @@ on:
             - main
 
 jobs:
-    deploy:
-        name: Deploy app
+    build_push:
+        name: Build and push app image
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
             - uses: superfly/flyctl-actions/setup-flyctl@v1
-            - run: flyctl deploy --remote-only
+            - run: fly deploy --build-only --push --image-label="$GITHUB_SHA"
+              env:
+                  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+    deploy:
+        name: Deploy and schedule machine
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: superfly/flyctl-actions/setup-flyctl@v1
+            - run: fly m run registry.fly.io/automated-backup:$GITHUB_SHA --schedule=hourly
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

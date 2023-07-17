@@ -5,6 +5,3 @@
 
 app = "automated-backup"
 primary_region = "cdg"
-
-# Launch backup every hour
-schedule = "hourly"
