@@ -11,7 +11,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: superfly/flyctl-actions/setup-flyctl@v1
-            - run: fly deploy --build-only --push --image-label="$GITHUB_SHA"
+            - run: flyctl deploy --build-only --push --image-label="$GITHUB_SHA"
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
@@ -21,6 +21,6 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: superfly/flyctl-actions/setup-flyctl@v1
-            - run: fly m run registry.fly.io/automated-backup:$GITHUB_SHA --schedule=hourly
+            - run: flyctl m run registry.fly.io/automated-backup:$GITHUB_SHA --schedule=hourly
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
