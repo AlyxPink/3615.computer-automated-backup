@@ -13,6 +13,7 @@ jobs:
             - uses: superfly/flyctl-actions/setup-flyctl@v1
             - run: |
                   flyctl deploy --build-only --push --image-label="$GITHUB_SHA"
+                  fly m list -q | xargs -I{} fly m destroy "{}"
                   flyctl m run registry.fly.io/automated-backup:$GITHUB_SHA --schedule=hourly
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
