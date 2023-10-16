@@ -15,3 +15,21 @@ BACKUP_PREFIX=xxx
 BACKUP_DIRECTORY=/var/backups
 DATABASE_URL=postgres://db_name:password@instance_address.flycast:5432/db_name?sslmode=disable
 ```
+
+## How to restore the dump?
+
+### Restic
+
+To restore the snapshot:
+
+```
+$ restic restore snapshot_id --no-lock --target=/tmp/restored_snapshot
+```
+
+### PostgreSQL
+
+On your PostgreSQL server:
+
+```
+$ psql -h localhost -U postgres db_name < backup_file.sql
+```
