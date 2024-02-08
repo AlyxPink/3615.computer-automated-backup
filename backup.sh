@@ -39,4 +39,4 @@ restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRECTORY
 #   keep all monthly snapshots made within 2 year
 #   keep all yearly snapshots made within 10 years
 echo "Apply retention policy by deleting old snapshots..."
-restic forget --keep-last 50 --keep-within-hourly 48h --keep-within-daily 30d --keep-within-weekly 3m --keep-within-monthly 2y --keep-within-yearly 10y
+restic forget --prune --keep-last 50 --keep-within-hourly 48h --keep-within-daily 30d --keep-within-weekly 3m --keep-within-monthly 2y --keep-within-yearly 10y
