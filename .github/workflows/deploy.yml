@@ -15,4 +15,4 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --build-only --push --image-label="$GITHUB_SHA"
       - run: flyctl m list -q | xargs -I{} flyctl m destroy "{}"
-      - run: flyctl m run registry.fly.io/automated-backup:$GITHUB_SHA --vm-memory=2048 --schedule=hourly
+      - run: flyctl m run registry.fly.io/automated-backup:$GITHUB_SHA --vm-memory=2048 --schedule=hourly --restart=no
