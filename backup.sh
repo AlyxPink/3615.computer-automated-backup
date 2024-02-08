@@ -21,7 +21,7 @@ echo "Backup filename: ${filename}"
 
 # Run the pg_dump command to create the backup
 echo "Dumping database to ${backup_file}..."
-pg_dump $DATABASE_URL -f "${backup_file}"
+pg_dump -Fc $DATABASE_URL -f "${backup_file}"
 
 # Remove any locks
 restic unlock
