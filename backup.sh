@@ -23,6 +23,9 @@ echo "Backup filename: ${filename}"
 echo "Dumping database to ${backup_file}..."
 pg_dump $DATABASE_URL -f "${backup_file}"
 
+# Remove any locks
+restic unlock
+
 # Run restic to upload our backup
 echo "Uploading ${backup_file} to $RESTIC_REPOSITORY..."
 restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRECTORY
