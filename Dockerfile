@@ -1,4 +1,4 @@
-FROM restic/restic:0.16.0
+FROM restic/restic:0.16.4
 
 RUN apk add --no-cache \
     postgresql
